@@ -42,7 +42,11 @@ def main() -> None:
         raise SystemExit(1)
     out_dir = Path(os.environ.get("OUTPUT_DIR", "/output"))
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "entry.txt").write_text(EXCUSE, encoding="utf-8")
+    out_path = out_dir / "entry.txt"
+    out_path.write_text(EXCUSE, encoding="utf-8")
+    # Confirm the write on stdout so a local run shows the gate result
+    # without having to inspect the file.
+    print(f"Wrote {len(EXCUSE)}-char excuse to {out_path}")
 
 
 if __name__ == "__main__":
